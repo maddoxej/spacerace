@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Space Race Unit Test Suite</title>
 <script type="text/javascript" src="board.js"></script>
-<script type="text/javascript" src="game.js"></script>
+<script type="text/javascript" src="spaceRace.js"></script>
+<script type="text/javascript" src="Planet.js"></script>
  <script src="http://code.jquery.com/jquery-latest.js"></script>
   <link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen" />
 <script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
@@ -12,31 +13,49 @@
 
   <script type="text/javascript">
   $(document).ready(function(){
-	  
-	test("a basic test example", function() {
-	  ok( true, "this test is fine" );
-	  var value = "hello";
-	  equal( value, "hello", "We expect value to be hello" );
+	module("Planet");
+	test("Constructor", function() {
+		var p1, p2;
+		p1 = new Planet(3,5);
+		p2 = new Planet(4,7);
+		notEqual(p1,p2, "should have different planets");
+		
+		ok(typeof(p1.land) === "undefined", "land should be private");
+	});
+	
+	test("setLand", function(){
+		var p1, p2;
+		p1 = new Planet(3,5);
+		p2 = new Planet(4,7);
+		p1.setLand(2,3);
+		ok(p1.getLand(2,3),"Planet should remember we set the land.");
+		ok(!p2.getLand(2,3),"Second Planet should have different land.");
+		
+		p1.setLand(2, 3, false);
+		ok(!p1.getLand(2,3), "should be water again");
+		
+	});
+	
+	test("iterate", function(){
+		var p1 = new Planet(3,5);
+		var calls = 0;		
+		
+		p1.foreach(function(x,y, land){
+			calls++;
+		});
+		
+		equal(calls,15,"should be 3*5 calls");
 	});
 
-	module("Module A");
+	module("spaceRace");
 
-	test("first test within module", function() {
-	  ok( true, "all pass" );
-	});
-
-	test("second test within module", function() {
-	  ok( true, "all pass" );
-	});
-
-	module("Module B");
-
-	test("some other test", 1, function() {
-	//  equal( true, false, "failing test" );
-  equal( true, true, "passing test" );
+	test("test constructor", function() {
+		var spaceRace = new SpaceRace();
+	  equal(spaceRace.columnCount, 100, "expected default columns" );
 	});
 
 });
+  
 </script>
 </head>
 <body>

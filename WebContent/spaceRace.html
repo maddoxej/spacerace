@@ -7,6 +7,8 @@
 <script type="text/javascript" src="jquery-1.7.1.js"></script>
 <script type="text/javascript" src="board.js"></script>
 <script type="text/javascript" src="spaceRace.js"></script>
+<script type="text/javascript" src="Planet.js"></script>
+
 
 <style type="text/css">
 	.cell
@@ -49,9 +51,10 @@
 </head>
 <body>
 <h1>Space Race</h1>
-<div id="spaceRaceBoard"></div>
+<div id="spaceRaceBoard">Creating planet. One moment please.</div>
 <script type="text/javascript">
 	var spaceRace = new SpaceRace();
+	spaceRace.showBoard(new Board());
 </script>
 </body>
 </html>
