@@ -1,62 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Space Race Unit Test Suite</title>
-<script type="text/javascript" src="board.js"></script>
-<script type="text/javascript" src="spaceRace.js"></script>
-<script type="text/javascript" src="Planet.js"></script>
- <script src="http://code.jquery.com/jquery-latest.js"></script>
-  <link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen" />
-<script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
-
-
-  <script type="text/javascript">
-  $(document).ready(function(){
-	module("Planet");
-	test("Constructor", function() {
-		var p1, p2;
-		p1 = new Planet(3,5);
-		p2 = new Planet(4,7);
-		notEqual(p1,p2, "should have different planets");
-		
-		ok(typeof(p1.land) === "undefined", "land should be private");
-	});
-	
-	test("setLand", function(){
-		var p1, p2;
-		p1 = new Planet(3,5);
-		p2 = new Planet(4,7);
-		p1.setLand(2,3);
-		ok(p1.getLand(2,3),"Planet should remember we set the land.");
-		ok(!p2.getLand(2,3),"Second Planet should have different land.");
-		
-		p1.setLand(2, 3, false);
-		ok(!p1.getLand(2,3), "should be water again");
-		
-	});
-	
-	test("iterate", function(){
-		var p1 = new Planet(3,5);
-		var calls = 0;		
-		
-		p1.foreach(function(x,y, land){
-			calls++;
-		});
-		
-		equal(calls,15,"should be 3*5 calls");
-	});
-
-	module("spaceRace");
-
-	test("test constructor", function() {
-		var spaceRace = new SpaceRace();
-	  equal(spaceRace.columnCount, 100, "expected default columns" );
-	});
-
-});
-  
-</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Space Race Unit Test Suite</title>
+	<script type="text/javascript" src="jquery-1.7.1.js"></script>
+	  <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
+	<script type="text/javascript" src="qunit.js"></script>
+	<script type="text/javascript" src="yabble.js"></script>
+    <script type="text/javascript">
+	  define = require.define;
+	  
+     // qunit defines a global function named "module". 
+     //That conflicts with the module local variable that is passed by the wrapper function
+	  qModule = module;
+      require.setModuleRoot('./');
+      require.run('main')
+    </script>
 </head>
 <body>
   <h1 id="qunit-header">Space Race Unit Test Suite</h1>

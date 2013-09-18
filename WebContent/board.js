@@ -1,36 +1,66 @@
+//require.define({
+//	Board: function(require, exports, module){
+
 /* the Board object manages the DOM and HTML and UI */
-function Board(boardId){
+exports.Board = function(boardId){
 	
 	var self=this; // be sure to use the instance self instead of "this" in any callbacks.
-	self.boardId = boardId || 'spaceRaceBoard' ;
-	this.div = jQuery("#" + self.boardId);
+	this.boardId = boardId || 'spaceRaceBoard' ;
+	this.div = jQuery("#" + this.boardId);
 	
 	// It is fastest to use an id rather than a class. 
-	self.makeSelector = function(x, y){		
-		return "#" + self.boardId + "x" + x + "y" + y;
+	this.makeSelector = function(x, y){		
+		return "#" + this.boardId + "x" + x + "y" + y;
 	};	
-}
 
-Board.prototype.init = function(planet){
-	var row, self, rowHtml, boardHtml = "<div class='scrollbox'><div class='grid'>";
-	self = this;
-	row = 0;
-	rowHtml = "<div class='row'>";
-	planet.foreach(function(x, y, land){
-		if (row != y){
-			boardHtml+= rowHtml +="</div>"; 
-			// using an intermediate string (rowHtml) to build each row improves performance on older browsers.
-			rowHtml = "<div class='row'>";
-			row = y;
-		};
-				
-		rowHtml += "<div class='" +(land ? "": "water ") + "cell' id='" + self.makeSelector(x, y).slice(1) + "'>"+ (land ? "." : "~") + "</div>";
-	});
+	this.init = function(planet){
+		var row, self, rowHtml, boardHtml = "<div class='scrollbox'><div class='grid'>";
+		self = this;
+		row = 0;
+		rowHtml = "<div class='row'>";
+		planet.foreach(function(x, y, land){
+			if (row != y){
+				boardHtml+= rowHtml +="</div>"; 
+				// using an intermediate string (rowHtml) to build each row improves performance on older browsers.
+				rowHtml = "<div class='row'>";
+				row = y;
+			};
+					
+			rowHtml += "<div class='" +(land ? "": "water ") + "cell' id='" + self.makeSelector(x, y).slice(1) + "'>"+ (land ? "." : "~") + "</div>";
+		});
+		
+		boardHtml+= rowHtml +="</div>";
+		
+		// close the grid and the scrollbox
+		boardHtml+="</div></div>";
+		this.div.html(boardHtml);
+		
+		// TODO draw any cells that have been created. 
+		
+		planet.subscribe('onChange', this.update);
+	};
 	
-	boardHtml+= rowHtml +="</div>";
+	this.update= function(event){
+		self.drawCell(event.x, event.y, event.cell, event.planet);
+	};
 	
-	// close the grid and the scrollbox
-	boardHtml+="</div></div>";
-	this.div.html(boardHtml);
+	this.drawCell = function(x, y, cell, planet){
+		var c = "E"; // default value is Error
+		if (cell){
+			switch (cell.type){
+			case 'Resource':
+				c = "*";
+				break;		
+			}
+		} else {
+			c = planet.getLand(x, y) ? "." : "~";
+		}
+		
+		// TODO define classes for friendly enemy and neutral. 
+		self.div.find(self.makeSelector(x, y)).html(c).css("background-color","grey");
+	};
+
 };
 
+//	}
+//});

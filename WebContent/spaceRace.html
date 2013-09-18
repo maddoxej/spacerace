@@ -5,9 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Space Race</title>
 <script type="text/javascript" src="jquery-1.7.1.js"></script>
-<script type="text/javascript" src="board.js"></script>
-<script type="text/javascript" src="spaceRace.js"></script>
-<script type="text/javascript" src="Planet.js"></script>
+<script type="text/javascript" src="yabble.js"></script>
 
 
 <style type="text/css">
@@ -17,7 +15,8 @@
 		margin: 0;
 		width: 1em;
 		background-color: brown;
-		font-family: courier new;
+		font-family:Consolas,'Lucida Console','DejaVu Sans Mono',monospace;
+		text-align:center;
 	}
 	 div.water 
 	{
@@ -52,9 +51,40 @@
 <body>
 <h1>Space Race</h1>
 <div id="spaceRaceBoard">Creating planet. One moment please.</div>
+<div id="buildDialog" style="display:none">
+<fieldset>
+<legend>Choose what kind of robot to build</legend>
+<div>
+<input type="radio" name="buildType" id="buildMinor"/><label for="buildMinor" accesskey="M">Minor</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildTransport"/><label for="buildTransport" accesskey="T">Transport</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildDroid"/><label for="buildDroid" accesskey="D">Droid</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildRover"/><label for="buildRover" accesskey="R">Rover</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildFlyer"/><label for="buildFlyer" accesskey="F">Flyer</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildBattle"/><label for="buildBattle" accesskey="B">Battle Bot</label>
+</div>
+</fieldset>
+</div>
 <script type="text/javascript">
-	var spaceRace = new SpaceRace();
-	spaceRace.showBoard(new Board());
+	define = require.define;
+	require.ensure(['SpaceRace', 'Board'], function(require){
+		var SpaceRace = require('SpaceRace').SpaceRace;
+		var Board = require('Board').Board;
+		var spaceRace = new SpaceRace();
+		spaceRace.createLand();
+		spaceRace.showBoard(new Board());
+		spaceRace.createResources();
+	});
+	
 </script>
 </body>
 </html>
