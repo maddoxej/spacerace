@@ -1,0 +1,2 @@
+require('testPlanet');
+require('testSpaceRace');

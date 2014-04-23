@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+	.cell
+	{
+		float:left;	
+		margin: 0;
+		width: 1em;
+		background-color: brown;
+		font-family:Consolas,'Lucida Console','DejaVu Sans Mono',monospace;
+		text-align:center;
+	}
+	 div.water 
+	{
+		background-color: blue;
+	}
+	.row
+	{
+		clear:left;
+		line-height: 1em;
+		margin: 0;
+		border: 0;
+	}
+	.scrollbox 
+	{
+		margin: 0;
+		border: 0;
+		height: 40em;
+		width: 99%;
+		overflow: scroll;
+	}
+	.grid
+	{
+		margin: 0;
+		border: 0;
+		width: 100em;
+		height: 60em;
+	}
