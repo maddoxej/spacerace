@@ -3,7 +3,7 @@
 
 /* the Board object manages the DOM and HTML and UI */
 exports.Board = function(boardId){
-	
+	"use strict";
 	var self=this; // be sure to use the instance self instead of "this" in any callbacks.
 	this.boardId = boardId || 'spaceRaceBoard' ;
 	this.div = jQuery("#" + this.boardId);
@@ -34,9 +34,7 @@ exports.Board = function(boardId){
 		// close the grid and the scrollbox
 		boardHtml+="</div></div>";
 		this.div.html(boardHtml);
-		
-		// TODO draw any cells that have been created. 
-		
+				
 		planet.subscribe('onChange', this.update);
 	};
 	

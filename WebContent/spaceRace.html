@@ -6,52 +6,15 @@
 <title>Space Race</title>
 <script type="text/javascript" src="jquery-1.7.1.js"></script>
 <script type="text/javascript" src="yabble.js"></script>
+<script type="text/javascript" src="jquery-ui-1.8.18.custom.min.js"></script>
 
-
-<style type="text/css">
-	.cell
-	{
-		float:left;	
-		margin: 0;
-		width: 1em;
-		background-color: brown;
-		font-family:Consolas,'Lucida Console','DejaVu Sans Mono',monospace;
-		text-align:center;
-	}
-	 div.water 
-	{
-		background-color: blue;
-	}
-	.row
-	{
-		clear:left;
-		line-height: 1em;
-		margin: 0;
-		border: 0;
-	}
-	.scrollbox 
-	{
-		margin: 0;
-		border: 0;
-		height: 40em;
-		width: 99%;
-		overflow: scroll;
-	}
-	.grid
-	{
-		margin: 0;
-		border: 0;
-		width: 100em;
-		height: 60em;
-	}
-}
-</style>
+<link rel="stylesheet" href="Board.css" type="text/css" />
 
 </head>
 <body>
 <h1>Space Race</h1>
 <div id="spaceRaceBoard">Creating planet. One moment please.</div>
-<div id="buildDialog" style="display:none">
+<div id="buildDialog">
 <fieldset>
 <legend>Choose what kind of robot to build</legend>
 <div>
@@ -75,14 +38,17 @@
 </fieldset>
 </div>
 <script type="text/javascript">
+	$('#buildDialog').dialog({position: {at: "bottom left"}})
+
 	define = require.define;
 	require.ensure(['SpaceRace', 'Board'], function(require){
 		var SpaceRace = require('SpaceRace').SpaceRace;
 		var Board = require('Board').Board;
 		var spaceRace = new SpaceRace();
 		spaceRace.createLand();
-		spaceRace.showBoard(new Board());
+		spaceRace.showBoard(new Board());	
 		spaceRace.createResources();
+		spaceRace.run();
 	});
 	
 </script>

@@ -5,6 +5,7 @@
  */
 
 exports.Planet = function(columnCount, rowCount){
+		"use strict";
 		var cells, // sparse 2d array of cell objects addressable by [x][y]
 			cellList = [], // list of cell objects
 			events = {onChange:[]},

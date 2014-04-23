@@ -77,31 +77,20 @@ exports.SpaceRace = function(options){
 	
 	
 	this.run = function(){
-		
-		function gameLoop(){
-			var p;
-			while (!this.isEndOfGame()){
-				this.day++;
-				this.createRobots();
-				for (p=0; p< self.players.length; p++){
-					self.players[p].moveRobots();
-				}			
-			}
-		};
-		
-		time.fpsCallback(gameLoop, this, 20);
+		for (; !isEndOfGame(); ){
+			this.nextDay();
+		}
 		
 		//TODO show winner. 
 	}; 
 	
 	this.isEndOfGame = function(){
-		return self.players.length > 1;
+		return self.players.length < 2;
 	};
 	
-	this.createRobots = function(){
-		var i, resources;
-		resources = planet.getCells().forEach(function(element, index, array){
-			if (element.type == 'Resource' && element.completionDay == this.day) {
+	this.createRobots = function(){		
+		resources = self.planet.getCells().forEach(function(element, index, array){
+			if (element.type == Resource.type && element.completionDay == self.day) {
 				element.createRobot();
 			}
 		});		
@@ -113,9 +102,13 @@ exports.SpaceRace.prototype.showBoard = function(board){
 	board.init(this.planet);
 };
 	
-
 exports.SpaceRace.prototype.nextDay = function (){
-	// TODO function to check for end of game.
+	self.day++;
+	self.createRobots();
+	var p;
+	for (p=0; p< self.players.length; p++){
+		self.players[p].moveRobots();
+	}			
 };
 
 
