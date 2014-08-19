@@ -4,11 +4,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Space Race</title>
-<script type="text/javascript" src="jquery-1.7.1.js"></script>
+<script type="text/javascript" src="jquery-1.10.2.js"></script>
 <script type="text/javascript" src="yabble.js"></script>
-<script type="text/javascript" src="jquery-ui-1.8.18.custom.min.js"></script>
+<script type="text/javascript" src="jquery-ui-1.10.4.custom.js"></script>
 
 <link rel="stylesheet" href="Board.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui-1.10.4.custom.css" type="text/css" />
 
 </head>
 <body>
@@ -38,7 +39,7 @@
 </fieldset>
 </div>
 <script type="text/javascript">
-	$('#buildDialog').dialog({position: {at: "bottom left"}})
+	$('#buildDialog').dialog({position: {at: "bottom left"}});
 
 	define = require.define;
 	require.ensure(['SpaceRace', 'Board'], function(require){
