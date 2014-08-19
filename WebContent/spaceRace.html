@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Space Race</title>
+<script type="text/javascript" src="jquery-1.7.1.js"></script>
+<script type="text/javascript" src="yabble.js"></script>
+<script type="text/javascript" src="jquery-ui-1.8.18.custom.min.js"></script>
+
+<link rel="stylesheet" href="Board.css" type="text/css" />
+
+</head>
+<body>
+<h1>Space Race</h1>
+<div id="spaceRaceBoard">Creating planet. One moment please.</div>
+<div id="buildDialog">
+<fieldset>
+<legend>Choose what kind of robot to build</legend>
+<div>
+<input type="radio" name="buildType" id="buildMinor"/><label for="buildMinor" accesskey="M">Minor</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildTransport"/><label for="buildTransport" accesskey="T">Transport</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildDroid"/><label for="buildDroid" accesskey="D">Droid</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildRover"/><label for="buildRover" accesskey="R">Rover</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildFlyer"/><label for="buildFlyer" accesskey="F">Flyer</label>
+</div>
+<div>
+<input type="radio" name="buildType" id="buildBattle"/><label for="buildBattle" accesskey="B">Battle Bot</label>
+</div>
+</fieldset>
+</div>
+<script type="text/javascript">
+	$('#buildDialog').dialog({position: {at: "bottom left"}})
+
+	define = require.define;
+	require.ensure(['SpaceRace', 'Board'], function(require){
+		var SpaceRace = require('SpaceRace').SpaceRace;
+		var Board = require('Board').Board;
+		var spaceRace = new SpaceRace();
+		spaceRace.createLand();
+		spaceRace.showBoard(new Board());	
+		spaceRace.createResources();
+		spaceRace.run();
+	});
+	
+</script>
+</body>
+</html>
