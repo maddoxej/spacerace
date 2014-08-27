@@ -9,23 +9,39 @@ var paths = {
     css: 'css/*.css'
 }
 gulp.task('browserify', function() {
-    
-// start by reading a file that requires the rest of the files. 
-// Use BrowserIfy to evaluate the require statements, minify and combine them and make the source map for debugging
-// fix the sourcemap paths with mold. 
-// The sourcemap is created in-line put it in a separate file with exorcist
-// Write the resulting file to bundle.js. Since that is only one file and not a folder, use concat. 
+    // start by reading a file that requires the rest of the files. 
+    // Use BrowserIfy to evaluate the require statements, minify and combine them and make the source map for debugging
+    // fix the sourcemap paths with mold. 
+    // The sourcemap is created in-line put it in a separate file with exorcist
+    // Write the resulting file to bundle.js. Since that is only one file and not a folder, use concat. 
     gulp.src('js/main.js')
-    .pipe(browserify({
-        debug: true
-    }))
-    .pipe(transform(function() {
-        return mold.transformSourcesRelativeTo('.');
-    }))
-    .pipe(transform(function() {
-        return exorcist('./bundle.map.js');
-    }))
-    .pipe(concat('bundle.js')).pipe(gulp.dest('.'));
+        .pipe(browserify({
+            debug: true
+        }))
+        .pipe(transform(function() {
+            return mold.transformSourcesRelativeTo('.');
+        }))
+        .pipe(transform(function() {
+            return exorcist('./bundle.map.js');
+        }))
+        .pipe(concat('bundle.js'))
+        .pipe(gulp.dest('.'));
 });
-        
-gulp.task('default', ['browserify']);
+gulp.task('bundleTests', function() {
+    gulp.src('test/tests.js')
+        .pipe(browserify({
+            debug: true
+        }))
+        .pipe(transform(function() {
+            return mold.transformSourcesRelativeTo('.');
+        }))
+        .pipe(transform(function() {
+            return exorcist('./test/testBundle.map.js');
+        }))
+        .pipe(concat('test/testBundle.js'))
+        .pipe(gulp.dest('.'));
+})
+gulp.task('watch', function() {
+    gulp.watch(paths.js, ['browserify', 'bundleTests']);
+})
+gulp.task('default', ['watch', 'browserify', 'bundleTests']);

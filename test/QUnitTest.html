@@ -1,30 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Space Race Unit Test Suite</title>
-	<script type="text/javascript" src="jquery-1.10.2.js"></script>
-	  <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
-	<script type="text/javascript" src="qunit.js"></script>
-	<script type="text/javascript" src="yabble.js"></script>
-    <script type="text/javascript">
-	  define = require.define;
-	  
-     // qunit defines a global function named "module". 
-     //That conflicts with the module local variable that is passed by the wrapper function
-	  qModule = module;
-      require.setModuleRoot('./');
-      require.run('main')
-    </script>
+<meta charset="utf-8">
+<title>Space Race Unit Test Suite</title>
+<link rel="stylesheet" href="//code.jquery.com/qunit/qunit-1.14.0.css">
 </head>
 <body>
-  <h1 id="qunit-header">Space Race Unit Test Suite</h1>
- <h2 id="qunit-banner"></h2>
- <div id="qunit-testrunner-toolbar"></div>
- <h2 id="qunit-userAgent"></h2>
- <ol id="qunit-tests"></ol>
- <div id="qunit-fixture">test markup, will be hidden
-<div id="spaceRaceBoard"></div>
-</div>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="//code.jquery.com/qunit/qunit-1.14.0.js"></script>
+<script src="testBundle.js"></script>
 </body>
 </html>

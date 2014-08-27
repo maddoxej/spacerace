@@ -1,11 +1,11 @@
 //require.define({
 //	SpaceRace: function(require, exports, module) {
 	
-	var Planet = require('Planet').Planet,
-		HumanPlayer = require('HumanPlayer').HumanPlayer,
-		SimpleAI = require('SimpleAI').SimpleAI,
-		time= require('gamejs/time'),
-		Resource = require('Resource').Resource;
+	var Planet = require('./Planet').Planet,
+		HumanPlayer = require('./HumanPlayer').HumanPlayer,
+		SimpleAI = require('./SimpleAI').SimpleAI,
+		time= require('gamejs').time,
+		Resource = require('./Resource').Resource;
 	
 
 /* The main game class handles the data and logic */
@@ -16,7 +16,7 @@ exports.SpaceRace = function(options){
 	this.rowCount = options.rowCount || 60;
 	// TODO dynamically load the AI
 	this.players = options.players || [new HumanPlayer(), new SimpleAI()];
-    this.currentPlayer = players[0];
+    this.currentPlayer = this.players[0];
 		
 	this.planet = new Planet(this.columnCount, this.rowCount);
 	this.day = 0;
@@ -93,7 +93,7 @@ exports.SpaceRace = function(options){
             playerIndex++;        
         }
         
-       // if players[currentPlayerIndex]
+       return players[playerIndex];
     };
 	
 	this.isEndOfGame = function(){
@@ -124,8 +124,3 @@ exports.SpaceRace = function(options){
     
 };
 
-
-
-
-//	}
-//}, ['Planet', 'HumanPlayer', 'SimpleAI', 'gamejs/time']);

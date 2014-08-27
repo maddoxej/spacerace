@@ -4,6 +4,7 @@
 /* the Board object manages the DOM and HTML and UI */
 exports.Board = function(boardId){
 	"use strict";
+    var jQuery = require('jquery');
 	var self=this; // be sure to use the instance self instead of "this" in any callbacks.
 	this.boardId = boardId || 'spaceRaceBoard' ;
 	this.div = jQuery("#" + this.boardId);

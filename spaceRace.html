@@ -1,15 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta charset="utf-8">
 <title>Space Race</title>
-<script type="text/javascript" src="jquery-1.10.2.js"></script>
-<script type="text/javascript" src="yabble.js"></script>
-<script type="text/javascript" src="jquery-ui-1.10.4.custom.js"></script>
-
-<link rel="stylesheet" href="Board.css" type="text/css" />
-<link rel="stylesheet" href="css/jquery-ui-1.10.4.custom.css" type="text/css" />
+<link rel="stylesheet" href="css/Board.css" type="text/css" />
+<link rel="stylesheet" href="/node_modules/jquery-ui/themes/base/jquery-ui.css" type="text/css" />
 
 </head>
 <body>
@@ -38,20 +33,6 @@
 </div>
 </fieldset>
 </div>
-<script type="text/javascript">
-	$('#buildDialog').dialog({position: {at: "bottom left"}});
-
-	define = require.define;
-	require.ensure(['SpaceRace', 'Board'], function(require){
-		var SpaceRace = require('SpaceRace').SpaceRace;
-		var Board = require('Board').Board;
-		var spaceRace = new SpaceRace();
-		spaceRace.createLand();
-		spaceRace.showBoard(new Board());	
-		spaceRace.createResources();
-		spaceRace.run();
-	});
-	
-</script>
+<script src="bundle.js"></script>
 </body>
 </html>

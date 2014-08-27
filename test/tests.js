@@ -1,2 +1,2 @@
-require('testPlanet');
-require('testSpaceRace');
+require('./testPlanet');
+require('./testSpaceRace');

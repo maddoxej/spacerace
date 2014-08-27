@@ -1,6 +1,6 @@
-	qModule("spaceRace");
+	QUnit.module("spaceRace");
 
-	var SpaceRace = require('SpaceRace').SpaceRace;
+	var SpaceRace = require('../js/SpaceRace').SpaceRace;
 	test("test constructor", function() {
 			var spaceRace = new SpaceRace();
   		    equal(spaceRace.columnCount, 100, "expected default columns" );

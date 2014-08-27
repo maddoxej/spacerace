@@ -1,5 +1,5 @@
-	qModule("Planet");
-	var Planet = require('Planet').Planet;
+	QUnit.module("Planet");
+	var Planet = require('../js/Planet').Planet;
 	
 	test("Constructor", function() {
 		var p1, p2;
