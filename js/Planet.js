@@ -12,9 +12,9 @@ exports.Planet = function(columnCount, rowCount){
 		//	self, // use in call backs
 			x, // column iterator
 			land= []; // 2d array of booleans. If not land then it must be water
-			land.length = columnCount;
+			land.length = columnCount;   
 		
-	//	self = this;
+		self = this;
 		
 		/* an individual square on the map */
 		function Cell(land){
@@ -29,12 +29,11 @@ exports.Planet = function(columnCount, rowCount){
 			};
 		}		
 		
-		for (x = 0; x < land.length; x++){
+		for (x =0; x < columnCount; x++){
 			land[x]= [];
 			land[x].length = rowCount;
 		};
-		
-		// sparsely populated grid of cells
+// sparsely populated grid of cells
 //		for (var property in object) {
 //		    if (String(property >>> 0) == property &&
 //		            property >>> 0 != 0xffffffff) {
@@ -43,7 +42,7 @@ exports.Planet = function(columnCount, rowCount){
 //		}
 		cells = [];
 		cells.length = columnCount;
-		for (x = 0; x < cells.length; x++){
+		for (x =0; x < columnCount; x++){
 			cells[x]= [];
 			cells[x].length = rowCount;
 		};
@@ -84,13 +83,12 @@ exports.Planet = function(columnCount, rowCount){
 	      
 	      return inside;
 	   };
-
 		
 		this.foreach = function(callback){
 			var x, y;
 			for (y=0; y < land[0].length; y++){
-				for (x=0; x < land.length; x++){
-					callback(x, y, land[x][y]);
+				for (x =0; x < land.length; x++){
+					callback(x, y, this.getLand(x,y));
 				}
 			}
 		};
@@ -103,7 +101,7 @@ exports.Planet = function(columnCount, rowCount){
 				isLand = true;				
 			}
 			
-			land[x][y] = isLand;
+            land[x][y] = isLand;
 		};
 		
 		this.getLand = function(x,y){			
@@ -145,8 +143,7 @@ exports.Planet = function(columnCount, rowCount){
 		};
 		
 		this.notify= function(eventType, event){
-			var i=0;
-			for (i=0; i < events[eventType].length; i++){
+			for (var i in events[eventType]){
 				events[eventType][i](event);
 			}
 		};
