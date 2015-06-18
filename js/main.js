@@ -15,4 +15,4 @@ var Board = require('./Board').Board;
 var spaceRace = new SpaceRace();
 spaceRace.createLand();
 spaceRace.showBoard(new Board());
-spaceRace.createResources();
+var start = spaceRace.createResources();

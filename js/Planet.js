@@ -9,7 +9,7 @@ exports.Planet = function(columnCount, rowCount){
 		var cells, // sparse 2d array of cell objects addressable by [x][y]
 			cellList = [], // list of cell objects
 			events = {onChange:[]},
-		//	self, // use in call backs
+			self, // use in call backs
 			x, // column iterator
 			land= []; // 2d array of booleans. If not land then it must be water
 			land.length = columnCount;   
