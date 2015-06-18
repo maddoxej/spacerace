@@ -3,9 +3,26 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     transform = require('vinyl-transform'),
     exorcist = require('exorcist'),
-    mold = require('mold-source-map');
+    mold = require('mold-source-map'),
+    notification = require('node-notifier'),
+    util = require('gulp-util');
+
+// Standard error handler
+function errorHandler(err){
+  // Notification  
+  notification.notify({ message: 'Error: ' + err.message });
+  // Log to console
+  util.log(util.colors.red('Error'), err.message);
+}
+
+// Handler for browserify
+function browserifyHandler(err){
+  errorHandler(err);
+  this.end();
+}
+
 var paths = {
-    js: 'js/*.js',
+    js: ['js/*.js','test/src/*.js'],
     css: 'css/*.css'
 }
 gulp.task('browserify', function() {
@@ -17,28 +34,30 @@ gulp.task('browserify', function() {
     gulp.src('js/main.js')
         .pipe(browserify({
             debug: true
-        }))
+        }).on('error', browserifyHandler))
         .pipe(transform(function() {
             return mold.transformSourcesRelativeTo('.');
-        }))
+        })).on('error', errorHandler)
         .pipe(transform(function() {
             return exorcist('./bundle.map.js');
-        }))
+        })).on('error', errorHandler)
         .pipe(concat('bundle.js'))
+        .on('error', errorHandler)
         .pipe(gulp.dest('.'));
 });
 gulp.task('bundleTests', function() {
-    gulp.src('test/tests.js')
+    gulp.src('test/src/tests.js')
         .pipe(browserify({
             debug: true
-        }))
+        }).on('error', browserifyHandler))
         .pipe(transform(function() {
             return mold.transformSourcesRelativeTo('.');
-        }))
+        })).on('error', errorHandler)
         .pipe(transform(function() {
             return exorcist('./test/testBundle.map.js');
-        }))
+        })).on('error', errorHandler)
         .pipe(concat('test/testBundle.js'))
+        .on('error', errorHandler)
         .pipe(gulp.dest('.'));
 })
 gulp.task('watch', function() {
